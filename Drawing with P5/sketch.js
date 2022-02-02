@@ -116,8 +116,9 @@ var y = function(sketches) {
     // Set border color to white
     sketches.stroke(255);
     // Set border strength
-    /* This stroke weight is too high for some points to be fine, 
-    but is necessary for the proportion of the border */
+    /* The default setting for strokeJoin() is Miter, which should create sharp angles. 
+    However, this stroke weight is too high for some points to be fine, 
+    but is necessary for the proportion of the border.  */
     sketches.strokeWeight(4);
     // Set color to dark green
     sketches.fill(0,140,0);
