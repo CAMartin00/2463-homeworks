@@ -34,60 +34,106 @@ let startFourY = 560;
 // Class for characters
 class Character
 {
+
+  // Constructor for characters
   constructor(spriteSheet,posX,posY)
   {
-    this.posX = posX;
-    this.posY = posY;
-    this.spriteSheet = spriteSheet;
+
+    // Spritesheet variables
     this.spriteOffX = 0;
     this.spriteOffY = 0;
-    this.facing = 1;
-    this.moveSpeed = 1;
+    this.spriteSheet = spriteSheet;
+
+    // Position and Scaling variables
+    this.posX = posX;
+    this.posY = posY;
+    this.facing = 1;   
+    
+    // Movement variables
+    this.moveSpeed = 2;
+    this.moveX = 0;
+    this.moveY = 0;
   }
 
-  // Draw the character, to be called in draw()
+  // Function to draw character
   draw()
   {
-    scale(facing,1);
-    image(this.spriteSheet,this.posX,this.posY,spriteX,spriteY,this.spriteOffX,this.spriteOffY,spriteX,spriteY);
+
+    // Center sketching on position and flip horizontally if necessary
+    translate(this.posX,this.posY);
+    scale(this.facing,1);
+
+    // Draw sprite
+    image(this.spriteSheet,0,0,spriteX,spriteY,this.spriteOffX*spriteX,this.spriteOffY*spriteY,spriteX,spriteY);
+
+    // Iterate to next sprite if necessary
+    if(frameCount % 5 == 0)
+    {
+      if(this.moveX != 0) 
+      {
+
+        // Set Y to 0 for walking
+        this.spriteOffY = 0;
+        this.spriteOffX = (this.spriteOffX + 1) % 9;
+      }
+      else if(this.moveY != 0) 
+      {
+
+        // Set Y to 7 for walking
+        this.spriteOffY = 7;
+        this.spriteOffX = (this.spriteOffX + 1) % 10;
+      }
+      
+      // Set to idle position, but don't change to climbing/walking, stay in same mode
+      else this.spriteOffX = 0;
+    }
+
+    // Reset sketching position and unflip horizontally if necessary
+    scale(this.facing,1);
+    translate(-this.posX,-this.posY);
+
+    // Calculate new position
+    this.posX += this.moveX * this.moveSpeed;
+    this.posY += this.moveY * this.moveSpeed;
+
+    // Handle minimum and maximum positions
+    if(this.posX < spriteX/2) this.posX = spriteX/2;
+    else if(this.posX > canvasWidth - spriteX/2) this.posX = canvasWidth - spriteX/2;
+    if(this.posY < spriteY/2) this.posY = spriteY/2;
+    else if(this.posY > canvasHeight - spriteY/2) this.posY = canvasHeight - spriteY/2;
   }
 
+  // Functions to handle movement of sprite
   moveUp()
   {
-    if(this.posY - this.moveSpeed >= this.height/2)
-    {
       this.moveX = 0;
-      this.moveY = 1;
-    }
+      this.moveY = -1;
   }
 
   moveDown()
   {
-    if(this.posY + this.moveSpeed <= canvasHeight - this.height/2)
-    {
       this.moveX = 0;
-      this.moveY = -1;
-    }
+      this.moveY = 1;
   }
 
   moveLeft()
   {
-    if(this.posX - this.moveSpeed >= this.width/2)
-    {
       this.facing = -1;
       this.moveY = 0;
       this.moveX = -1;
-    }
   }
 
   moveRight()
   {
-    if(this.posX + this.moveSpeed <= canvasWidth - this.width/2)
-    {
       this.facing = 1;
       this.moveY = 0;
       this.moveX = 1;
-    }
+  }
+
+  stopMove()
+  {
+    this.moveY = 0;
+    this.moveX = 0;
   }
 }
 
@@ -116,14 +162,10 @@ function setup()
 function draw() 
 {
   background(255);
-  fill(200);
-  rect(100,100,20,20);
   playerOne.draw();
   playerTwo.draw();
   playerThree.draw();
   playerFour.draw();
-  fill(100);
-  rect(100,100,20,20);
 }
 
 // When a key is pressed, move the related character
@@ -131,109 +173,74 @@ function keyPressed()
 {
 // Player 1 (wasd)
   // Pressing w causes Player 1 to move up
-  if(keyCode == 87)
-  {
-    playerOne.moveUp();
-  }
+  if(keyCode == 87) playerOne.moveUp();
+  
   // Pressing s causes Player 1 to move down
-  else if(keyCode == 83)
-  {
-    playerOne.moveDown();
-  }
+  else if(keyCode == 83) playerOne.moveDown();
+  
   // Pressing a causes Player 1 to move left
-  else if(keyCode == 65) 
-  {
-    playerOne.moveLeft();
-  }
+  else if(keyCode == 65)  playerOne.moveLeft();
+  
   // Pressing d causes Player 1 to move right
-  else if(keyCode == 68)
-  {
-    playerOne.moveRight();
-  }
-  // Providing no input for Player 1 causes them to become idle
-  else
-  {
-    //playerOne.setIdle();
-  }
+  else if(keyCode == 68) playerOne.moveRight();
 
 // Player 2 (tfgh)
   // Pressing t causes Player 2 to move up
-  if(keyCode == 84)
-  {
-    playerTwo.moveUp();
-  }
+  if(keyCode == 84) playerTwo.moveUp();
+  
   // Pressing g causes Player 2 to move down
-  else if(keyCode == 71)
-  {
-    playerTwo.moveDown();
-  }
+  else if(keyCode == 71) playerTwo.moveDown();
+  
   // Pressing f causes Player 2 to move left
-  else if(keyCode == 70) 
-  {
-    playerTwo.moveLeft();
-  }
+  else if(keyCode == 70)  playerTwo.moveLeft();
+  
   // Pressing h causes Player 2 to move right
-  else if(keyCode == 72)
-  {
-    playerTwo.moveRight();
-  }
-  // Providing no input for Player 2 causes them to become idle
-  else
-  {
-    //playerTwo.setIdle();
-  }
+  else if(keyCode == 72) playerTwo.moveRight();
 
 // Player 3 (ijkl)
   // Pressing i causes Player 3 to move up
-  if(keyCode == 73)
-  {
-    playerThree.moveUp();
-  }
+  if(keyCode == 73) playerThree.moveUp();
+  
   // Pressing k causes Player 3 to move down
-  else if(keyCode == 75)
-  {
-    playerThree.moveDown();
-  }
+  else if(keyCode == 75) playerThree.moveDown();
+  
   // Pressing j causes Player 3 to move left
-  else if(keyCode == 74) 
-  {
-    playerThree.moveLeft();
-  }
+  else if(keyCode == 74) playerThree.moveLeft();
+  
   // Pressing l causes Player 3 to move right
-  else if(keyCode == 76)
-  {
-    playerThree.moveRight();
-  }
-  // Providing no input for Player 3 causes them to become idle
-  else
-  {
-    //playerTwo.setIdle();
-  }
+  else if(keyCode == 76) playerThree.moveRight();
 
 // Player 4 (Arrow Keys)
   // Pressing up causes Player 4 to move up
-  if(keyCode == 38)
-  {
-    playerFour.moveUp();
-  }
+  if(keyCode == 38) playerFour.moveUp();
+  
   // Pressing down causes Player 4 to move down
-  else if(keyCode == 40)
-  {
-    playerFour.moveDown();
-  }
+  else if(keyCode == 40) playerFour.moveDown();
+  
   // Pressing left causes Player 4 to move left
-  else if(keyCode == 37) 
-  {
-    playerFour.moveLeft();
-  }
+  else if(keyCode == 37) playerFour.moveLeft();
+  
   // Pressing right causes Player 4 to move right
-  else if(keyCode == 39)
+  else if(keyCode == 39) playerFour.moveRight();
+}
+
+// When a key is released, stop the player who's input it was
+function keyReleased()
+{
+  if(keyCode == 87 || keyCode == 83 || keyCode == 65 || keyCode == 68) 
   {
-    playerFour.moveRight();
+    playerOne.stopMove();
   }
-  // Providing no input for Player 4 causes them to become idle
-  else
+  else if(keyCode == 84 || keyCode == 71 || keyCode == 70 || keyCode == 72)
   {
-    //playerFour.setIdle();
+    playerTwo.stopMove();
+  }
+  else if(keyCode == 73 || keyCode == 75 || keyCode == 74 || keyCode == 76)
+  {
+    playerThree.stopMove();
+  }
+  else if(keyCode == 38 || keyCode == 40 || keyCode == 37 || keyCode == 39)
+  {
+    playerFour.stopMove();
   }
 }
