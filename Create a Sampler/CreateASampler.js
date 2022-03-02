@@ -35,7 +35,7 @@ function setup()
   
   // Connect sounds to delay, delay to chebyshev, then output chebyshev audio
   sounds.connect(delay);
-  delay.connect(cheb)
+  delay.connect(cheb);
   cheb.toDestination();
 
   // Create the slider for Delay

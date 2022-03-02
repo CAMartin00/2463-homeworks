@@ -26,3 +26,5 @@ Player 4 (Bottom Right) - Arrow Keys
 4 - [Bug Squish Game Assignment](Bug%20Squish%20Game/index.html)
 
 5 - [Create a Sampler Assignment](Create%20a%20Sampler/index.html)
+
+6 - [Synths and Sequencers Assignment](Synths%20and%20Sequencers/index.html)
