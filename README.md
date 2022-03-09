@@ -28,3 +28,5 @@ Player 4 (Bottom Right) - Arrow Keys
 5 - [Create a Sampler Assignment](Create%20a%20Sampler/index.html)
 
 6 - [Synths and Sequencers Assignment](Synths%20and%20Sequencers/index.html)
+
+7 - [Sound Synthesis and Sound Effects Assignment](Sound%20Synthesis%20and%20Sound%20Effects/index.html)
