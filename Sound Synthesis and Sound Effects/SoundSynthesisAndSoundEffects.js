@@ -113,7 +113,6 @@ function mousePressed()
     toneStarted = true;
   }
 
-
   // Trigger a long burst, then a short burst, then a long burst again
   longAmpEnv.triggerAttackRelease(5);
   shortAmpEnv.triggerAttackRelease(5,"+5");

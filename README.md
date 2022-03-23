@@ -30,3 +30,5 @@ Player 4 (Bottom Right) - Arrow Keys
 6 - [Synths and Sequencers Assignment](Synths%20and%20Sequencers/index.html)
 
 7 - [Sound Synthesis and Sound Effects Assignment](Sound%20Synthesis%20and%20Sound%20Effects/index.html)
+
+8 - [Make P5 Sing Assignment](Make%20P5%20Sing/index.html)
