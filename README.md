@@ -32,3 +32,9 @@ Player 4 (Bottom Right) - Arrow Keys
 7 - [Sound Synthesis and Sound Effects Assignment](Sound%20Synthesis%20and%20Sound%20Effects/index.html)
 
 8 - [Make P5 Sing Assignment](Make%20P5%20Sing/index.html)
+
+11 - [Serial Communication Assignment](Serial%20Communication/index.html)
+
+Clicking will toggle the red LED attached to Digital Pin 3
+
+Changing the Potentiometer will make the background change from black to white (greyscale)
