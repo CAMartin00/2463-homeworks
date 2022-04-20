@@ -38,3 +38,10 @@ Player 4 (Bottom Right) - Arrow Keys
 Clicking will toggle the red LED attached to Digital Pin 3
 
 Changing the Potentiometer will make the background change from black to white (greyscale)
+
+12 - [Controller Assignment](Controller/index.html)
+
+The joystick controls the movement of the cursor (black circle)
+Clicking the joystick in will act as clicking and squish any bugs under the cursor
+The output for this was meant to be a buzzer, but this doesn't seem to work. It may be my wiring or I may just have the code wrong.
+Instead, the on-board LED lights up for .333 seconds before turning off when a bug is squished.
